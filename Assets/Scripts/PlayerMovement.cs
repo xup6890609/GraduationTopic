@@ -62,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         CDImage.fillAmount -= 1.0f / dashCoolDown * Time.deltaTime;
+        Physics.gravity = new Vector3(0, -1000f, 0);
     }
 
     private void FixedUpdate()

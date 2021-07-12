@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 public class MenuManager : MonoBehaviour
 {
     public GameObject Settings;
+    public AudioMixer audioMixer;
+
     public void StartGame()
     {
         print("開始遊戲");

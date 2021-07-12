@@ -1685,6 +1685,14 @@ PrefabInstance:
       propertyPath: speed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1185379229, guid: adc92cbf83a51430f976793d714c1edd, type: 3}
+      propertyPath: dashForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1185379229, guid: adc92cbf83a51430f976793d714c1edd, type: 3}
+      propertyPath: dashSpeed
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 8544784867937168480, guid: adc92cbf83a51430f976793d714c1edd,
         type: 3}
       propertyPath: m_Name
@@ -1744,6 +1752,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8544784867937168483, guid: adc92cbf83a51430f976793d714c1edd,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adc92cbf83a51430f976793d714c1edd, type: 3}
@@ -2096,6 +2109,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Eagle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7055042455239340056, guid: f4080aff22a364f4aa16a90b6933bee5,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7055042455239340062, guid: f4080aff22a364f4aa16a90b6933bee5,
         type: 3}
