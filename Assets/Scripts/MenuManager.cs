@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+
 public class MenuManager : MonoBehaviour
 {
     public GameObject Settings;
@@ -17,7 +18,7 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void SetVolume()
+    public void PauseGame()
     {
         Settings.SetActive(true);
         Time.timeScale = 0f;
@@ -27,5 +28,10 @@ public class MenuManager : MonoBehaviour
     {
         Settings.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    public void SetVolume(float value)
+    {
+        audioMixer.SetFloat("MainVolume", value);
     }
 }

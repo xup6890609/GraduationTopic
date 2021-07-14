@@ -516,7 +516,18 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1829428538}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &564033900
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,6 +808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Settings: {fileID: 0}
+  audioMixer: {fileID: 0}
 --- !u!1 &893739875
 GameObject:
   m_ObjectHideFlags: 0
@@ -1614,7 +1626,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1829428543}
-        m_MethodName: SetVolume
+        m_MethodName: PauseGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1853,13 +1865,24 @@ MonoBehaviour:
   m_FillRect: {fileID: 321356917}
   m_HandleRect: {fileID: 1562987107}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
+  m_MinValue: -80
+  m_MaxValue: 20
+  m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1829428543}
+        m_MethodName: SetVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1410920809
 GameObject:
   m_ObjectHideFlags: 0
@@ -2929,6 +2952,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Settings: {fileID: 1812510651}
+  audioMixer: {fileID: 24100000, guid: 827e8bad1ca766041bd67db824246d74, type: 2}
 --- !u!82 &1829428544
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2938,10 +2962,11 @@ AudioSource:
   m_GameObject: {fileID: 1829428538}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 827e8bad1ca766041bd67db824246d74,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 7c5e4b46aedbbd14f859490ca859ff20, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
