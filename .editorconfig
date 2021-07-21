@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS1522: 空的 switch 區塊
+dotnet_diagnostic.CS1522.severity = none
