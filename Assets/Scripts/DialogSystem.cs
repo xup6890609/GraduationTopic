@@ -19,6 +19,7 @@ public class DialogSystem : MonoBehaviour
 
 
     bool textFinished;
+    bool cancelTyping;
 
     List<string> textList = new List<string>();
 
@@ -46,9 +47,20 @@ public class DialogSystem : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && textFinished)
+        /// <summary>
+        /// 如果上一行播完了且沒有取消打字動作，就執行StartCoroutine的程式
+        /// </summary>
+
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            StartCoroutine(SetTextUI());
+           if(textFinished && !cancelTyping)
+            {
+                StartCoroutine(SetTextUI());
+            }
+           else if(!textFinished && !cancelTyping)
+            {
+                cancelTyping = true;
+            }
         }
     }
 
@@ -86,11 +98,15 @@ public class DialogSystem : MonoBehaviour
                 break;
         }
 
-        for (int i = 0; i < textList[index].Length; i++)
+        int letter = 0;
+        while(!cancelTyping && letter < textList[index].Length - 1)
         {
-            textLabel.text += textList[index][i];
+            textLabel.text += textList[index][letter];
+            letter++;
             yield return new WaitForSeconds(textSpeed);
         }
+        textLabel.text = textList[index];
+        cancelTyping = false;
         textFinished = true;
         index++;                                     //增加行數
     }
