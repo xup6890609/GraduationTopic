@@ -8,11 +8,15 @@ public class DialogSystem : MonoBehaviour
     [Header("UI組件")]
     public Text textLabel;
     public Image faceImage;
+    public Image Names;
 
     [Header("對話框文件")]
     public TextAsset textFile;
     public int index;
     public float textSpeed;
+
+    [Header("名稱")]
+    public Sprite namePlayer, nameNPC;
 
     [Header("頭像")]
     public Sprite facePlayer, faceNPC;
@@ -89,11 +93,13 @@ public class DialogSystem : MonoBehaviour
         {
             case "A\r":
                 faceImage.sprite = facePlayer;          //切換頭像
+                Names.sprite = namePlayer;
                 index++;                                //略過這行
                 break;
 
             case "B\r":
                 faceImage.sprite = faceNPC;             //切換頭像
+                Names.sprite = nameNPC;
                 index++;                                //略過這行
                 break;
         }
