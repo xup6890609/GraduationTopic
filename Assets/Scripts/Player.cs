@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    internal static Sprite sprite;
     public GameObject final;
 
     public Text textCount;

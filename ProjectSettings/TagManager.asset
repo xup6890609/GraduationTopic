@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Enemy
   - DeadLine
-  - Cherry
-  - Gem
-  - Money/RMB
-  - Money/USD
+  - danger
+  - Ground
+  - Monster
   - Wall
+  - Collection
+  - CrashMonster
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - 
   - Ground
   - Wall
-  - 
+  - Spike
   - 
   - 
   - 
