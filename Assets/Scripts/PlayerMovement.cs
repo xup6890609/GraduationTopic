@@ -6,55 +6,65 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private Collider2D coll;
+    private BoxCollider2D coll;
     private Animator anim;
 
-    public float speed, jumpForce;
+    [Header("基本參數")]
+    public float speed =10f, jumpForce = 3f;
     private float horizontalMove;
+    private float crouchSpeed = 3f;
     public Transform groundCheck;
     public LayerMask ground;
-    
-    /*
-    public GameObject heart01;
-    宣告愛心01
-    public GameObject heart02;
-    宣告愛心02
-    public GameObject heart03;
-    宣告愛心3
-    */
+
+    [Header("動作狀態")]
+    public bool isGround, isJump, isCrouch, isDashing ;
+    bool jumpPressed;
+    int jumpCount;  //跳躍次數
+
+    /// <summary>
+    /// 碰撞體尺寸調整(讓下蹲時可以穿越障礙物)
+    /// </summary>
+    private Vector2 colliderStandSize; //站立時的尺寸
+    private Vector2 colliderStandOffset; //站立時的座標
+    private Vector2 colliderCrouchSize; //下蹲時的尺寸
+    private Vector2 colliderCrouchOffset; //下蹲時的座標
 
     //CD圖示
     [Header("CD時間的UI組件")]
     public Image CDImage;
 
+    [Header("血量")]
+    public GameObject hp;
+
+    //[Header("角色圖片切換")]
+    //public AnimatorOverrideController FloatingAnim;   //漂浮
+    //public AnimatorOverrideController CrashingAnim;   //衝撞
+
 
     //衝刺參數調整
+
     [Header("衝刺時間")]
-    public float dashTime;          
+    public float dashTime;
     private float dashLeft;           //衝刺剩餘時間
 
     [Header("衝刺速度")]
-    public float dashSpeed;         
+    public float dashSpeed;
     private float LastDash = -10f;    //上次衝刺時間點
-    
+
     [Header("冷卻時間")]
     public float dashCoolDown;
-
-    public bool isGround, isJump, isDashing;
-
-    bool jumpPressed;
-
-    // 跳躍次數
-    int jumpCount;
-    //宣告愛心數量=3
-    //int HeartNum = 3;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        coll = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
+        coll = GetComponent<BoxCollider2D>();
+        colliderStandSize = coll.size;
+        colliderStandOffset = coll.offset;
+        colliderCrouchSize = new Vector2(coll.size.x, coll.size.y / 2f);
+        colliderCrouchOffset = new Vector2(coll.offset.x, coll.offset.y / 2f);
+
     }
 
     // Update is called once per frame
@@ -64,28 +74,16 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpPressed = true;
         }
-
-        //如果按下"Z"鍵，遊戲時間已大於等於上次衝刺時間和CD時間，就執行衝刺
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            if (Time.time >= LastDash + dashCoolDown)
-            {
-                ReadyToDash();
-            }
-        }
-
-        CDImage.fillAmount -= 1.0f / dashCoolDown * Time.deltaTime;
-        Physics.gravity = new Vector3(0, -1000f, 0);
     }
 
     private void FixedUpdate()
     {
         isGround = Physics2D.OverlapCircle(groundCheck.position, 0.1f, ground);
-        
+
         Dash();
         if (isDashing)      ///執行衝刺時///
-          return;           ///不進行其他動作///
-          
+            return;           ///不進行其他動作///
+
         GroundMovement();
 
         Jump();
@@ -94,50 +92,55 @@ public class PlayerMovement : MonoBehaviour
         SwitchAnim();
     }
 
-    /*
-    private void OnTriggerStay2D(Collider2D other)  //玩家碰到傷害會執行
-    {
-        if (other.tag == "danger")  //碰到tag是danger時，扣一顆心
-        {
-            //刪除怪物
-            Destroy(collision.gameObject);
-
-            HeartNum = HeartNum - 1;
-            //愛心數量減一
-
-            //根據愛心數量顯示愛心圖案
-            if (HeartNum == 2)  //如果還有三顆愛心
-            {
-                heart01.SetActive(false);
-                //第一顆愛心隱藏
-            }
-            else if(HeartNum == 1)  //如果剩兩顆愛心
-            {
-                heart02.SetActive(false);
-                //第二顆愛心隱藏
-            }
-            else if (HeartNum == 1)  //如果剩一顆愛心
-            {
-                heart03.SetActive(false);
-                //第三顆愛心隱藏
-            }
-        }
-    }
-    */
-
+    /// <summary>
+    /// 地面移動
+    /// </summary>
     void GroundMovement()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal");//只返回-1，0，1
-        rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y);
+        horizontalMove = Input.GetAxisRaw("Horizontal");//值只返回-1，0，1
+        rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y); //一般狀態下的值
+        
+        //下蹲狀態下的值
+        if (isCrouch)
+        {
+            horizontalMove /= crouchSpeed;
+        }
 
         if (horizontalMove != 0)
         {
             transform.localScale = new Vector3(horizontalMove, 1, 1);
         }
 
+        //如果按下unity預設下蹲按鍵，就執行"下蹲"動作
+        if (Input.GetButton("Crouch"))
+        {
+            Crouch();
+        }
+
+        //如果沒有，則自動執行"起立"動作
+        else if(!Input.GetButton("Crouch") && isCrouch)
+        {
+            StandUp();
+        }
+
+        FilpDirction();
     }
 
-    void Jump()//跳跃
+    /// <summary>
+    /// 翻轉左右方向
+    /// </summary>
+    void FilpDirction()
+    {
+        if (horizontalMove > 0)
+            transform.localScale = new Vector2(1, 1);
+        if (horizontalMove < 0)
+            transform.localScale = new Vector2(-1, 1);
+    }
+
+    /// <summary>
+    /// 跳躍
+    /// </summary>
+    void Jump()
     {
         if (isGround)
         {
@@ -159,7 +162,30 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void SwitchAnim()//動畫切换
+    /// <summary>
+    /// 下蹲
+    /// </summary>
+    void Crouch()
+    {
+        isCrouch = true;
+        coll.size = colliderCrouchSize;
+        coll.offset = colliderCrouchOffset;
+    } 
+    
+    /// <summary>
+    /// 起立
+    /// </summary>
+    void StandUp()
+    {
+        isCrouch = false;
+        coll.size = colliderStandSize;
+        coll.offset = colliderStandOffset;
+    }
+
+    /// <summary>
+    /// 切換動畫動作
+    /// </summary>
+    void SwitchAnim()
     {
         anim.SetFloat("running", Mathf.Abs(rb.velocity.x));
 
@@ -178,6 +204,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 準備衝刺
+    /// </summary>
     void ReadyToDash()
     {
         isDashing = true;
@@ -187,13 +216,16 @@ public class PlayerMovement : MonoBehaviour
         CDImage.fillAmount = 1;
     }
 
+    /// <summary>
+    /// 衝刺
+    /// </summary>
     void Dash()
     {
         if (isDashing)
         {
-            if(dashLeft > 0)
+            if (dashLeft > 0)
             {
-                if(rb.velocity.y > 0 && !isGround)
+                if (rb.velocity.y > 0 && !isGround)
                 {
                     rb.velocity = new Vector2(dashSpeed * horizontalMove, jumpForce);
                 }
@@ -203,7 +235,7 @@ public class PlayerMovement : MonoBehaviour
 
                 ShadowPool.instance.GetFromPool();
             }
-            if(dashLeft <= 0)
+            if (dashLeft <= 0)
             {
                 isDashing = false;
                 if (!isGround)
@@ -214,9 +246,21 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    //切換角色顯示動畫
+   // public void FloatSkin()
+    //{
+   //     GetComponent<Animator>().runtimeAnimatorController = FloatingAnim as RuntimeAnimatorController;
+   // }
+
+    //public void CrashSkin()
+    //{
+    // GetComponent<Animator>().runtimeAnimatorController = CrashingAnim as RuntimeAnimatorController;
+    // }
+
+    //如果玩家碰到收集物件，收集物件就消失
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Collection")
+        if (collision.tag == "Collection")
         {
             Destroy(collision.gameObject);
 
@@ -226,13 +270,43 @@ public class PlayerMovement : MonoBehaviour
     //如果玩家攻擊妖怪，妖怪就消失
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.tag == "DashMonster")
+        {
+            if (Time.time >= LastDash + dashCoolDown)
+            {
+                Destroy(collision.gameObject);
+                ReadyToDash();
+            }
+
+            CDImage.fillAmount -= 1.0f / dashCoolDown * Time.deltaTime;
+            Physics.gravity = new Vector3(0, -1000f, 0);
+        }
+
+        if (collision.gameObject.tag == "Monster")
+        {
+            hp.GetComponent<HP>().LoseLife();
+
+        }
+
         if (anim.GetBool("Attack"))
         {
             if (collision.gameObject.tag == "Monster")
             {
                 Destroy(collision.gameObject);
-                //Player.sprite = WithMonster;
+               // FloatSkin();
             }
+            else
+            {
+
+            }
+
         }
+    }
+    /// <summary>
+    /// 死亡
+    /// </summary>
+    public void Dead()
+    {
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,5 +39,10 @@ public class HP : MonoBehaviour
                 hearts[i].enabled = false;
             }
         }
+    }
+
+    internal void LoseLife()
+    {
+        throw new NotImplementedException();
     }
 }
