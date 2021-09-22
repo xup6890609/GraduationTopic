@@ -12,6 +12,9 @@ TagManager:
   - Wall
   - Collection
   - CrashMonster
+  - DashMonster
+  - Objects
+  - Lights
   layers:
   - Default
   - TransparentFX
@@ -24,7 +27,7 @@ TagManager:
   - Ground
   - Wall
   - Spike
-  - 
+  - Player
   - 
   - 
   - 

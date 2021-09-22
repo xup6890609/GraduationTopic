@@ -220,6 +220,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   CDImage: {fileID: 0}
+  hp: {fileID: 0}
   FloatingAnim: {fileID: 22100000, guid: 7a966d24c42cd014c91d7879d3d25f9e, type: 2}
   dashTime: 1
   dashSpeed: 30
@@ -227,6 +228,7 @@ MonoBehaviour:
   isGround: 0
   isJump: 1
   isDashing: 0
+  isHurt: 0
 --- !u!114 &1688904493
 MonoBehaviour:
   m_ObjectHideFlags: 0

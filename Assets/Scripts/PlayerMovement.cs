@@ -9,31 +9,23 @@ public class PlayerMovement : MonoBehaviour
     private Collider2D coll;
     private Animator anim;
 
-    [Header("基本參數")]
     public float speed, jumpForce;
     private float horizontalMove;
     public Transform groundCheck;
     public LayerMask ground;
-
-    //public GameObject heart01;
-
-    //宣告愛心01
-    //public GameObject heart02;
-    //宣告愛心02
-    // public GameObject heart03;
-    //宣告愛心3
+    
+    /*
+    public GameObject heart01;
+    宣告愛心01
+    public GameObject heart02;
+    宣告愛心02
+    public GameObject heart03;
+    宣告愛心3
+    */
 
     //CD圖示
     [Header("CD時間的UI組件")]
     public Image CDImage;
-
-    [Header("血量")]
-    public GameObject hp;
-
-
-    [Header("角色圖片切換")]
-    public AnimatorOverrideController FloatingAnim;   //漂浮
-    //public AnimatorOverrideController CrashingAnim;   //衝撞
 
 
     //衝刺參數調整
@@ -72,6 +64,18 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpPressed = true;
         }
+
+        //如果按下"Z"鍵，遊戲時間已大於等於上次衝刺時間和CD時間，就執行衝刺
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            if (Time.time >= LastDash + dashCoolDown)
+            {
+                ReadyToDash();
+            }
+        }
+
+        CDImage.fillAmount -= 1.0f / dashCoolDown * Time.deltaTime;
+        Physics.gravity = new Vector3(0, -1000f, 0);
     }
 
     private void FixedUpdate()
@@ -90,34 +94,36 @@ public class PlayerMovement : MonoBehaviour
         SwitchAnim();
     }
 
- //   private void OnTriggerStay2D(Collider2D other)  //玩家碰到傷害會執行
- //   {
-       // if (other.tag == "danger")  //碰到tag是danger時，扣一顆心
-       // {
+    /*
+    private void OnTriggerStay2D(Collider2D other)  //玩家碰到傷害會執行
+    {
+        if (other.tag == "danger")  //碰到tag是danger時，扣一顆心
+        {
             //刪除怪物
-            //Destroy(collision.gameObject);
+            Destroy(collision.gameObject);
 
-            //HeartNum = HeartNum - 1;
+            HeartNum = HeartNum - 1;
             //愛心數量減一
 
             //根據愛心數量顯示愛心圖案
-            //if (HeartNum == 2)  //如果還有三顆愛心
-           // {
-               // heart01.SetActive(false);
+            if (HeartNum == 2)  //如果還有三顆愛心
+            {
+                heart01.SetActive(false);
                 //第一顆愛心隱藏
-            //}
-           // else if(HeartNum == 1)  //如果剩兩顆愛心
-           // {
-               // heart02.SetActive(false);
+            }
+            else if(HeartNum == 1)  //如果剩兩顆愛心
+            {
+                heart02.SetActive(false);
                 //第二顆愛心隱藏
-           // }
-           // else if (HeartNum == 1)  //如果剩一顆愛心
-           // {
-           //     heart03.SetActive(false);
+            }
+            else if (HeartNum == 1)  //如果剩一顆愛心
+            {
+                heart03.SetActive(false);
                 //第三顆愛心隱藏
-           // }
-      //  }
- //   }
+            }
+        }
+    }
+    */
 
     void GroundMovement()
     {
@@ -208,18 +214,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //切換角色顯示動畫
-    public void FloatSkin()
-    {
-        GetComponent<Animator>().runtimeAnimatorController = FloatingAnim as RuntimeAnimatorController;
-    }   
-    
-    //public void CrashSkin()
-    //{
-       // GetComponent<Animator>().runtimeAnimatorController = CrashingAnim as RuntimeAnimatorController;
-   // }
-
-    //如果玩家碰到收集物件，收集物件就消失
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Collection")
@@ -232,43 +226,13 @@ public class PlayerMovement : MonoBehaviour
     //如果玩家攻擊妖怪，妖怪就消失
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "CrashMonster")
-        {
-            if (Time.time >= LastDash + dashCoolDown)
-            {
-                Destroy(collision.gameObject);
-                ReadyToDash();
-            }
-
-            CDImage.fillAmount -= 1.0f / dashCoolDown * Time.deltaTime;
-            Physics.gravity = new Vector3(0, -1000f, 0);
-        }
-
-        if(collision.gameObject.tag == "Monster")
-        {
-           hp.GetComponent<HP>().LoseLife() ;
-
-        }
-
         if (anim.GetBool("Attack"))
         {
             if (collision.gameObject.tag == "Monster")
             {
                 Destroy(collision.gameObject);
-                FloatSkin();
+                //Player.sprite = WithMonster;
             }
-            else
-            {
-                
-            }
-
-       }
-    }
-    /// <summary>
-    /// 死亡
-    /// </summary>
-    public void Dead()
-    {
-        
+        }
     }
 }
