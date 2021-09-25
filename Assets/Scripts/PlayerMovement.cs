@@ -30,8 +30,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 colliderCrouchOffset; //下蹲時的座標
 
     //CD圖示
-    [Header("CD時間的UI組件")]
-    public Image CDImage;
+   // [Header("CD時間的UI組件")]
+   // public Image CDImage;
 
     [Header("血量")]
     public GameObject hp;
@@ -213,7 +213,7 @@ public class PlayerMovement : MonoBehaviour
 
         dashLeft = dashTime;
         LastDash = Time.time;
-        CDImage.fillAmount = 1;
+        //CDImage.fillAmount = 1;
     }
 
     /// <summary>
@@ -278,7 +278,7 @@ public class PlayerMovement : MonoBehaviour
                 ReadyToDash();
             }
 
-            CDImage.fillAmount -= 1.0f / dashCoolDown * Time.deltaTime;
+            //CDImage.fillAmount -= 1.0f / dashCoolDown * Time.deltaTime;
             Physics.gravity = new Vector3(0, -1000f, 0);
         }
 

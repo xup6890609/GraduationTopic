@@ -80,7 +80,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.856, y: 2.584}
+  m_Size: {x: 9.28, y: 12.92}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -125,7 +125,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.856, y: 2.584}
-    newSize: {x: 1.856, y: 2.584}
+    newSize: {x: 9.28, y: 12.92}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -143,7 +143,7 @@ Animator:
   m_GameObject: {fileID: 7166724634445984438}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2ddd8899d75271d4a95aed5e86e6e99c, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -174,11 +174,10 @@ MonoBehaviour:
   isJump: 0
   isCrouch: 0
   isDashing: 0
-  CDImage: {fileID: 0}
   hp: {fileID: 0}
   dashTime: 0.15
   dashSpeed: 50
-  dashCoolDown: 3
+  dashCoolDown: 1
 --- !u!1 &7166724636258643940
 GameObject:
   m_ObjectHideFlags: 0

@@ -43,6 +43,13 @@ public class HP : MonoBehaviour
 
     internal void LoseLife()
     {
-        throw new NotImplementedException();
+        if (NumofHearts == 0)
+            return;
+        NumofHearts--;
+        hearts[NumofHearts].enabled = false;
+        if(NumofHearts == 0)
+        {
+            Debug.Log("遊戲結束");
+        }
     }
 }
