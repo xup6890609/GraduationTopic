@@ -9,17 +9,32 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider2D coll;
     private Animator anim;
 
-    [Header("基本參數")]
-    public float speed =10f, jumpForce = 3f;
-    private float horizontalMove;
-    private float crouchSpeed = 3f;
-    public Transform groundCheck;
+    [Header("環境檢測")]
     public LayerMask ground;
 
+    [Header("血量")]
+    public GameObject hp;
+
+    [Header("移動參數")]
+    public float speed = 10f;
+    public float crouchSpeed = 3f;  //蹲下速度
+    private float horizontalMove;  //水平移動
+
+    [Header("跳躍參數")]
+    public float jumpForce = 6.3f;
+    public float jumpHoldForce = 1.9f;
+    public float jumpHoldDuration = 0.1f;
+    public float crouchJumpBoost = 2.5f; //跳躍額外加成
+    private float jumpTime;
+
     [Header("動作狀態")]
-    public bool isGround, isJump, isCrouch, isDashing ;
-    bool jumpPressed;
-    int jumpCount;  //跳躍次數
+    public bool isGround;
+    public bool isJump;
+    public bool isCrouch;
+    public bool isDashing;
+    bool jumpPressed; //單次跳躍
+    bool jumpHeld;   //長按跳躍
+    bool crouchHeld; //長按下蹲
 
     /// <summary>
     /// 碰撞體尺寸調整(讓下蹲時可以穿越障礙物)
@@ -33,8 +48,6 @@ public class PlayerMovement : MonoBehaviour
    // [Header("CD時間的UI組件")]
    // public Image CDImage;
 
-    [Header("血量")]
-    public GameObject hp;
 
     //[Header("角色圖片切換")]
     //public AnimatorOverrideController FloatingAnim;   //漂浮
@@ -59,10 +72,11 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
         coll = GetComponent<BoxCollider2D>();
         colliderStandSize = coll.size;
         colliderStandOffset = coll.offset;
-        colliderCrouchSize = new Vector2(coll.size.x, coll.size.y / 2f);
+        colliderCrouchSize = new Vector2(coll.size.x, coll.size.x );
         colliderCrouchOffset = new Vector2(coll.offset.x, coll.offset.y / 2f);
 
     }
@@ -70,27 +84,32 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Jump") && jumpCount > 0)
-        {
-            jumpPressed = true;
-        }
+        jumpPressed = Input.GetButtonDown("Jump");
+        jumpHeld = Input.GetButton("Jump");
+        crouchHeld = Input.GetButton("Crouch");
     }
 
     private void FixedUpdate()
     {
-        isGround = Physics2D.OverlapCircle(groundCheck.position, 0.1f, ground);
-
+        PhysicsCheck();
+        GroundMovement();
+        Jump();
         Dash();
         if (isDashing)      ///執行衝刺時///
             return;           ///不進行其他動作///
-
-        GroundMovement();
-
-        Jump();
-
-
         SwitchAnim();
     }
+
+    /// <summary>
+    /// 物理判斷
+    /// </summary>
+    void PhysicsCheck()
+    {
+        if (coll.IsTouchingLayers(ground))
+            isGround = true;
+        else isGround = false;
+    }
+
 
     /// <summary>
     /// 地面移動
@@ -98,13 +117,13 @@ public class PlayerMovement : MonoBehaviour
     void GroundMovement()
     {
         horizontalMove = Input.GetAxisRaw("Horizontal");//值只返回-1，0，1
-        rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y); //一般狀態下的值
-        
+       
         //下蹲狀態下的值
         if (isCrouch)
         {
             horizontalMove /= crouchSpeed;
         }
+        rb.velocity = new Vector2(horizontalMove * speed, rb.velocity.y); //一般狀態下的值
 
         if (horizontalMove != 0)
         {
@@ -112,13 +131,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //如果按下unity預設下蹲按鍵，就執行"下蹲"動作
-        if (Input.GetButton("Crouch"))
+        //如果按下unity預設下蹲按鍵 + 角色判斷在地面上，就執行"下蹲"動作
+        if (crouchHeld && !isCrouch && isGround)
         {
             Crouch();
         }
 
         //如果沒有，則自動執行"起立"動作
-        else if(!Input.GetButton("Crouch") && isCrouch)
+        else if(!crouchHeld && isCrouch )
         {
             StandUp();
         }
@@ -142,23 +162,31 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void Jump()
     {
-        if (isGround)
+        if (jumpPressed && isGround && ! isJump)
         {
-            jumpCount = 2;//可跳躍數量
-            isJump = false;
-        }
-        if (jumpPressed && isGround)
-        {
+            if(isCrouch && isGround)
+            {
+                StandUp();
+
+            }
+            isGround = false;
             isJump = true;
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            jumpCount--;
-            jumpPressed = false;
+            jumpTime = Time.time + jumpHoldDuration;
+            
+            rb.AddForce(new Vector2(0f, crouchJumpBoost), ForceMode2D.Impulse);//添加二維方向的力
         }
-        else if (jumpPressed && jumpCount > 0 && isJump)
+    
+
+        else if (isJump)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            jumpCount--;
-            jumpPressed = false;
+            if (jumpHeld)
+            {
+                rb.AddForce(new Vector2(0f, jumpHoldForce), ForceMode2D.Impulse); //添加二維方向的力
+            }
+            if(jumpTime < Time.time)
+            {
+                isJump = false;
+            }
         }
     }
 
@@ -193,15 +221,15 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("falling", false);
         }
-        else if (!isGround && rb.velocity.y > 0)
-        {
-            anim.SetBool("jumping", true);
-        }
-        else if (rb.velocity.y < 0)
-        {
-            anim.SetBool("jumping", false);
-            anim.SetBool("falling", true);
-        }
+        //else if (!isGround && rb.velocity.y > 0)
+       // {
+       //     anim.SetBool("jumping", true);
+       // }
+       // else if (rb.velocity.y < 0)
+       // {
+       //     anim.SetBool("jumping", false);
+        //    anim.SetBool("falling", true);
+       // }
     }
 
     /// <summary>

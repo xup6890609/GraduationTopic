@@ -120,7 +120,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.060000002, y: -0.17}
+  m_Offset: {x: 0.060000002, y: -0.06}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -131,7 +131,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7, y: 2.19}
+  m_Size: {x: 0.7, y: 2.38}
   m_EdgeRadius: 0
 --- !u!95 &7166724634445984437
 Animator:
@@ -143,7 +143,7 @@ Animator:
   m_GameObject: {fileID: 7166724634445984438}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0abc9748a3389b24a9b560476778e15b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -164,17 +164,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070afde29949d43b184f02ae92a2c8e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  jumpForce: 3
-  groundCheck: {fileID: 7166724636258643947}
   ground:
     serializedVersion: 2
     m_Bits: 256
+  hp: {fileID: 0}
+  speed: 10
+  crouchSpeed: 3
+  jumpForce: 3
+  jumpHoldForce: 1.9
+  jumpHoldDuration: 0.1
+  crouchJumpBoost: 2.5
   isGround: 0
   isJump: 0
   isCrouch: 0
   isDashing: 0
-  hp: {fileID: 0}
   dashTime: 0.15
   dashSpeed: 50
   dashCoolDown: 1
