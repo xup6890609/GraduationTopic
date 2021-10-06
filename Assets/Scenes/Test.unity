@@ -3565,6 +3565,7 @@ GameObject:
   - component: {fileID: 720233128}
   - component: {fileID: 720233130}
   - component: {fileID: 720233132}
+  - component: {fileID: 720233131}
   m_Layer: 0
   m_Name: frog-idle-1
   m_TagString: Monster
@@ -3657,6 +3658,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 5
+--- !u!58 &720233131
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720233127}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.58
 --- !u!114 &720233132
 MonoBehaviour:
   m_ObjectHideFlags: 0

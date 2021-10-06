@@ -8,8 +8,8 @@ public class EnemyFly : Enemy    //繼承enemy的類別
     public float startWithTime;
     public float waitTime;
 
-    public Transform leftDownPos;
-    public Transform rightUpPos;
+    public Transform leftDownPos; //左下角座標
+    public Transform rightUpPos;  //右上角座標
     public Transform movePos;
 
     // Start is called before the first frame update
@@ -41,6 +41,9 @@ public class EnemyFly : Enemy    //繼承enemy的類別
         }
     }
 
+    /// <summary>
+    /// 獲取隨機位置
+    /// </summary>
     Vector2 GetRandomPos()
     {
         Vector2 rndPos = new Vector2(Random.Range(leftDownPos.position.x, rightUpPos.position.x), Random.Range(leftDownPos.position.y, rightUpPos.position.y));

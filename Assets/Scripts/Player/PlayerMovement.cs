@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("移動參數")]
     public float speed = 10f;
     public float crouchSpeed = 3f;  //蹲下速度
-    private float horizontalMove;  //水平移動
+    public float horizontalMove;  //水平移動
 
     [Header("跳躍參數")]
     public float jumpForce = 6.3f;
@@ -97,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
         Dash();
         if (isDashing)      ///執行衝刺時///
             return;           ///不進行其他動作///
-        SwitchAnim();
+       // SwitchAnim();
     }
 
     /// <summary>
@@ -162,9 +162,9 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void Jump()
     {
-        if (jumpPressed && isGround && ! isJump)
+        if (jumpPressed && isGround && ! isJump )
         {
-            if(isCrouch && isGround)
+            if(isCrouch)
             {
                 StandUp();
 
@@ -213,14 +213,14 @@ public class PlayerMovement : MonoBehaviour
     /// <summary>
     /// 切換動畫動作
     /// </summary>
-    void SwitchAnim()
-    {
-        anim.SetFloat("running", Mathf.Abs(rb.velocity.x));
+   // void SwitchAnim()
+   // {
+    //    anim.SetFloat("running", Mathf.Abs(rb.velocity.x));
 
-        if (isGround)
-        {
-            anim.SetBool("falling", false);
-        }
+      //  if (isGround)
+      //  {
+      //      anim.SetBool("falling", false);
+      //  }
         //else if (!isGround && rb.velocity.y > 0)
        // {
        //     anim.SetBool("jumping", true);
@@ -230,7 +230,7 @@ public class PlayerMovement : MonoBehaviour
        //     anim.SetBool("jumping", false);
         //    anim.SetBool("falling", true);
        // }
-    }
+   // }
 
     /// <summary>
     /// 準備衝刺
@@ -295,9 +295,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //如果玩家攻擊妖怪，妖怪就消失
+    /// <summary>
+    /// 玩家動作控制
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
-    {
+    {   //如果玩家碰到衝刺妖怪，玩家執行衝刺、衝刺妖怪消失
         if (collision.gameObject.tag == "DashMonster")
         {
             if (Time.time >= LastDash + dashCoolDown)
@@ -309,12 +312,19 @@ public class PlayerMovement : MonoBehaviour
             //CDImage.fillAmount -= 1.0f / dashCoolDown * Time.deltaTime;
             Physics.gravity = new Vector3(0, -1000f, 0);
         }
-
+        //如果玩家碰到妖怪，玩家損血
         if (collision.gameObject.tag == "Monster")
         {
             hp.GetComponent<HP>().LoseLife();
 
-        }
+        }       
+        
+        if (collision.gameObject.tag == "Trap")
+        {
+            hp.GetComponent<HP>().LoseLife();
+
+        }       
+        
 
         if (anim.GetBool("Attack"))
         {
@@ -330,11 +340,13 @@ public class PlayerMovement : MonoBehaviour
 
         }
     }
+
     /// <summary>
     /// 死亡
     /// </summary>
     public void Dead()
     {
-
+        anim.SetTrigger("Die");
+        rb.bodyType = RigidbodyType2D.Static; //禁止角色移動
     }
 }

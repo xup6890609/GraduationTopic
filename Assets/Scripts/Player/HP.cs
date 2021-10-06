@@ -13,6 +13,7 @@ public class HP : MonoBehaviour
     public Image[] hearts;
     public Sprite HP_Full;
     public Sprite HP_0;
+    public GameObject player;
 
     private void Update()
     {
@@ -49,7 +50,7 @@ public class HP : MonoBehaviour
         hearts[NumofHearts].enabled = false;
         if(NumofHearts == 0)
         {
-            Debug.Log("遊戲結束");
+           player.GetComponent<PlayerMovement>().Dead();
         }
     }
 }
