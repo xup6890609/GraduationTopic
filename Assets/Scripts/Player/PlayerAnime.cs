@@ -37,6 +37,6 @@ public class PlayerAnime : MonoBehaviour
         anim.SetFloat(runningID, Mathf.Abs(movement.horizontalMove)); //判斷在animator面板中的值是否為0
         anim.SetBool(idleID, movement.isGround);
         anim.SetBool(crouchID, movement.isCrouch);
-        //anim.SetFloat(jumpingID, movement.Jumping);
+        anim.SetBool(jumpingID, movement.isJump);
     }
 }

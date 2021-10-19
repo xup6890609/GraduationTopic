@@ -36,6 +36,12 @@ public class PlayerMovement : MonoBehaviour
     bool jumpHeld;   //長按跳躍
     bool crouchHeld; //長按下蹲
 
+    [Header("攀爬參數")]
+    public float climb;
+    float climbSpeed = 8f;
+    bool isLadder;
+    bool isClimbing;
+
     /// <summary>
     /// 碰撞體尺寸調整(讓下蹲時可以穿越障礙物)
     /// </summary>
@@ -94,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
         PhysicsCheck();
         GroundMovement();
         Jump();
+        Climb();
         Dash();
         if (isDashing)      ///執行衝刺時///
             return;           ///不進行其他動作///
@@ -162,7 +169,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void Jump()
     {
-        if (jumpPressed && isGround && ! isJump )
+        if (jumpPressed && isGround  )
         {
             if(isCrouch)
             {
@@ -187,6 +194,27 @@ public class PlayerMovement : MonoBehaviour
             {
                 isJump = false;
             }
+        }
+    }
+
+    /// <summary>
+    /// 爬梯子
+    /// </summary>
+    void Climb()
+   {
+        climb = Input.GetAxis("Climb");
+        if(isLadder && Mathf.Abs(climb) > 0f)
+        {
+            isClimbing = true;
+        }
+        if (isClimbing)
+        {
+           rb.gravityScale = 0f;
+            rb.velocity = new Vector2(rb.velocity.x, climb * climbSpeed);
+        }
+        else
+        {
+            rb.gravityScale = 1f;
         }
     }
 
@@ -275,10 +303,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //切換角色顯示動畫
-   // public void FloatSkin()
+    // public void FloatSkin()
     //{
-   //     GetComponent<Animator>().runtimeAnimatorController = FloatingAnim as RuntimeAnimatorController;
-   // }
+    //     GetComponent<Animator>().runtimeAnimatorController = FloatingAnim as RuntimeAnimatorController;
+    // }
 
     //public void CrashSkin()
     //{
@@ -291,14 +319,27 @@ public class PlayerMovement : MonoBehaviour
         if (collision.tag == "Collection")
         {
             Destroy(collision.gameObject);
+        }
 
+        if (collision.CompareTag("Ladder"))
+       {
+            isLadder = true;
+        }
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ladder"))
+        {
+            isLadder = false;
+            isClimbing = false;
         }
     }
 
     /// <summary>
     /// 玩家動作控制
     /// </summary>
-    /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {   //如果玩家碰到衝刺妖怪，玩家執行衝刺、衝刺妖怪消失
         if (collision.gameObject.tag == "DashMonster")
