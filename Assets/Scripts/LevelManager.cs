@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+
     public void NextLevel(string nameLV)
     {
         SceneManager.LoadScene(nameLV);
@@ -11,6 +12,7 @@ public class LevelManager : MonoBehaviour
     public void BackToMenu()
     {
         SceneManager.LoadScene("選單");
+
     }
 
     public void Quit()

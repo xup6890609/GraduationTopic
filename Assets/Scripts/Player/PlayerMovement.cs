@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("跳躍參數")]
     public float jumpForce = 6.3f;
-    public float jumpHoldForce = 1.9f;
+    public float jumpHoldForce = 0.1f;
     public float jumpHoldDuration = 0.1f;
     public float crouchJumpBoost = 2.5f; //跳躍額外加成
     private float jumpTime;
@@ -35,12 +35,17 @@ public class PlayerMovement : MonoBehaviour
     bool jumpPressed; //單次跳躍
     bool jumpHeld;   //長按跳躍
     bool crouchHeld; //長按下蹲
+    bool isDead = false;
 
     [Header("攀爬參數")]
-    public float climb;
+    private float climb;
     float climbSpeed = 8f;
     bool isLadder;
     bool isClimbing;
+
+    [Header("場景轉換")]
+    public static PlayerMovement instance;
+    public string scenePassword;
 
     /// <summary>
     /// 碰撞體尺寸調整(讓下蹲時可以穿越障礙物)
@@ -72,6 +77,22 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("冷卻時間")]
     public float dashCoolDown;
+
+   /*private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            if (instance != this)
+            {
+              Destroy(gameObject);
+            }
+        }
+        DontDestroyOnLoad(gameObject);
+    }*/
 
     // Start is called before the first frame update
     void Start()
@@ -388,6 +409,15 @@ public class PlayerMovement : MonoBehaviour
     public void Dead()
     {
         anim.SetTrigger("Die");
-        rb.bodyType = RigidbodyType2D.Static; //禁止角色移動
+        isDead = true;
+        FindObjectOfType<LevelManager>().BackToMenu();
+    }
+
+    /// <summary>
+    /// 重置玩家
+    /// </summary>
+    public void ResetPlayer()
+    {
+        isDead = false;
     }
 }

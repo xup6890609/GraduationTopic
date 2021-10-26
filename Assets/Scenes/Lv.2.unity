@@ -246,6 +246,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: floorPNG
       objectReference: {fileID: 0}
+    - target: {fileID: 8659230596240130358, guid: 0635645bf4a1f6548936241da668a7d5,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 45b2e5bb214c1cf4b860edd5e9e5f421,
+        type: 3}
+    - target: {fileID: 8659230596240130358, guid: 0635645bf4a1f6548936241da668a7d5,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8659230596240130358, guid: 0635645bf4a1f6548936241da668a7d5,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8659230596240130358, guid: 0635645bf4a1f6548936241da668a7d5,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8659230596240130361, guid: 0635645bf4a1f6548936241da668a7d5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -254,7 +275,7 @@ PrefabInstance:
     - target: {fileID: 8659230596240130361, guid: 0635645bf4a1f6548936241da668a7d5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.95
+      value: -4.12
       objectReference: {fileID: 0}
     - target: {fileID: 8659230596240130361, guid: 0635645bf4a1f6548936241da668a7d5,
         type: 3}
@@ -378,8 +399,19 @@ PrefabInstance:
     - target: {fileID: 113650604900725937, guid: 4a8da34512f12774d979debcae3ad789,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.49
+      value: -0.77
       objectReference: {fileID: 0}
+    - target: {fileID: 113650604900725937, guid: 4a8da34512f12774d979debcae3ad789,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 151236073669206928, guid: 4a8da34512f12774d979debcae3ad789,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000,
+        type: 0}
     - target: {fileID: 3868536444728194016, guid: 4a8da34512f12774d979debcae3ad789,
         type: 3}
       propertyPath: enterPassword

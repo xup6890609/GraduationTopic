@@ -15,8 +15,11 @@ TagManager:
   - DashMonster
   - Objects
   - Lights
-  - "\u9053\u5177"
   - Ladder
+  - MovingPlatforms
+  - Trap
+  - "\u9053\u5177"
+  - Interactive
   layers:
   - Default
   - TransparentFX
@@ -32,9 +35,9 @@ TagManager:
   - Player
   - Enemy
   - Ladder
-  - 
-  - 
-  - 
+  - Background
+  - Interactive
+  - Environment
   - 
   - 
   - 
@@ -66,11 +69,11 @@ TagManager:
   - name: items
     uniqueID: 2924622781
     locked: 0
-  - name: Ladder
-    uniqueID: 3705440453
-    locked: 0
   - name: Ground
     uniqueID: 3016427017
+    locked: 0
+  - name: Ladder
+    uniqueID: 3705440453
     locked: 0
   - name: Frontground
     uniqueID: 2041733605

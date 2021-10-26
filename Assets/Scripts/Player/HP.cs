@@ -44,13 +44,20 @@ public class HP : MonoBehaviour
 
     internal void LoseLife()
     {
+        //hp = 0 時
         if (NumofHearts == 0)
             return;
+
+        //扣hp的值
         NumofHearts--;
+        
+        //hp圖片變成空心狀態
         hearts[NumofHearts].enabled = false;
+
+        //沒有心心時，玩家死亡
         if(NumofHearts == 0)
         {
-           player.GetComponent<PlayerMovement>().Dead();
+           FindObjectOfType<PlayerMovement>().Dead();
         }
     }
 }
