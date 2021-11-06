@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     bool jumpPressed; //單次跳躍
     bool jumpHeld;   //長按跳躍
     bool crouchHeld; //長按下蹲
+    bool isRun;
     bool isDead = false;
 
     [Header("攀爬參數")]
@@ -121,6 +122,7 @@ public class PlayerMovement : MonoBehaviour
         PhysicsCheck();
         GroundMovement();
         Jump();
+        Run();
         Climb();
         Dash();
         if (isDashing)      ///執行衝刺時///
@@ -183,6 +185,14 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector2(1, 1);
         if (horizontalMove < 0)
             transform.localScale = new Vector2(-1, 1);
+    }
+
+    void Run()
+    {
+        if (isJump)
+        {
+            isRun = true;
+        }
     }
 
     /// <summary>
@@ -383,7 +393,12 @@ public class PlayerMovement : MonoBehaviour
         
         if (collision.gameObject.tag == "Trap")
         {
-            hp.GetComponent<HP>().LoseLife();
+            GetComponent<BoxCollider2D>().isTrigger = true;
+            if(GetComponent<BoxCollider2D>().isTrigger = true);
+        {
+                hp.GetComponent<HP>().LoseLife();
+        }
+
 
         }       
         
