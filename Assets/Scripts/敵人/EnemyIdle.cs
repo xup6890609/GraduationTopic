@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class EnemyIdle : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private Collider2D coll;
     private Animator anim;
+    public Transform pos;
 
     //獲得移動的位置
     public Transform Left, Right;
@@ -50,6 +51,15 @@ public class EnemyIdle : MonoBehaviour
                 transform.localScale = new Vector3(1, 1, 1);
                 isLeft = true;
             }
+        }
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Instantiate(rb, pos.position, pos.rotation);
         }
     }
 }

@@ -48,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement instance;
     public string scenePassword;
 
+
+
     /// <summary>
     /// 碰撞體尺寸調整(讓下蹲時可以穿越障礙物)
     /// </summary>
@@ -294,7 +296,7 @@ public class PlayerMovement : MonoBehaviour
     /// <summary>
     /// 準備衝刺
     /// </summary>
-    void ReadyToDash()
+    public void ReadyToDash()
     {
         isDashing = true;
 

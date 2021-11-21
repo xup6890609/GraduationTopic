@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class FloatingEnemies : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private Collider2D coll;
     private Animator anim;
+    public Transform pos;
+
 
     //獲得移動的位置
     public Transform Top, Bottom;
@@ -47,4 +49,18 @@ public class FloatingEnemies : MonoBehaviour
             }
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(gameObject.tag == "DashMonster")
+        {
+            if (collision.gameObject.tag == "Player")
+            {
+                Instantiate(rb, pos.position, pos.rotation);
+            }
+        }
+
+    }
+
+
 }
