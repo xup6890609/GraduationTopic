@@ -373,9 +373,20 @@ public class PlayerMovement : MonoBehaviour
     /// <summary>
     /// 玩家動作控制
     /// </summary>
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.tag == "DashMonster")
+        {
+            if (Time.time >= LastDash + dashCoolDown)
+            {
+                ReadyToDash();
+                Destroy(other.gameObject);
+            }
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {   //如果玩家碰到衝刺妖怪，玩家執行衝刺、衝刺妖怪消失
-        if (collision.gameObject.tag == "DashMonster")
+       /* if (collision.gameObject.tag == "DashMonster")
         {
             if (Time.time >= LastDash + dashCoolDown)
             {
@@ -385,7 +396,7 @@ public class PlayerMovement : MonoBehaviour
 
             //CDImage.fillAmount -= 1.0f / dashCoolDown * Time.deltaTime;
             Physics.gravity = new Vector3(0, -1000f, 0);
-        }
+        }*/
         //如果玩家碰到妖怪，玩家損血
         if (collision.gameObject.tag == "Monster")
         {
