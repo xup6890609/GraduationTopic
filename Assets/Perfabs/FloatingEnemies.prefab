@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7055042455239340063}
   - component: {fileID: 7055042455239340059}
   - component: {fileID: 7055042455239340058}
-  - component: {fileID: 1928203418}
   - component: {fileID: 4452234524515770502}
   m_Layer: 12
   m_Name: FloatingEnemies
@@ -116,9 +115,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acbffd261a8b0f140bef579bd8c838d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 4452234524515770502}
+  pos: {fileID: 7055042455239340062}
   Top: {fileID: 7055042455793693489}
   Bottom: {fileID: 7055042455716866898}
-  speed: 3
+  speed: 1
 --- !u!95 &7055042455239340058
 Animator:
   serializedVersion: 3
@@ -138,24 +139,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1928203418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7055042455239340037}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ed4a4057f707324b9784a3d8a009996, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  startWithTime: 1
-  waitTime: 0.2
-  leftDownPos: {fileID: 0}
-  rightUpPos: {fileID: 0}
-  movePos: {fileID: 0}
 --- !u!50 &4452234524515770502
 Rigidbody2D:
   serializedVersion: 4
@@ -201,7 +184,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7055042455716866909}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.41, z: 0}
+  m_LocalPosition: {x: 0, y: -0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7055042455239340062}
@@ -231,7 +214,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7055042455793693488}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.53, z: 0}
+  m_LocalPosition: {x: 0, y: -0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7055042455239340062}

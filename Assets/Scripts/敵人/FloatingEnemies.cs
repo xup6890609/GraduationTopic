@@ -15,7 +15,7 @@ public class FloatingEnemies : MonoBehaviour
     public float speed;
     private float TopY, BottonY;
 
-    private bool isUp;
+    private bool isUp = true;
 
     private void Start()
     {
@@ -50,7 +50,7 @@ public class FloatingEnemies : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    /*private void OnCollisionEnter2D(Collision2D collision)
     {
         if(gameObject.tag == "DashMonster")
         {
@@ -60,7 +60,7 @@ public class FloatingEnemies : MonoBehaviour
             }
         }
 
-    }
+    }*/
 
 
 }

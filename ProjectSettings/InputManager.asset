@@ -105,9 +105,9 @@ InputManager:
     m_Name: Climb
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
+    negativeButton: s
     positiveButton: w
-    altNegativeButton: 
+    altNegativeButton: down
     altPositiveButton: up
     gravity: 1000
     dead: 0.001

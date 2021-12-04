@@ -165,8 +165,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acbffd261a8b0f140bef579bd8c838d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Top: {fileID: 2423862390132667994}
-  Bottom: {fileID: 2423862390252184510}
+  rb: {fileID: 2423862390237932844}
+  pos: {fileID: 2423862390237932847}
+  Top: {fileID: 0}
+  Bottom: {fileID: 0}
   speed: 1.8
 --- !u!1 &2423862390252184509
 GameObject:

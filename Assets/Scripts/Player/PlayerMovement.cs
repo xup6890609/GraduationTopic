@@ -236,15 +236,18 @@ public class PlayerMovement : MonoBehaviour
     void Climb()
    {
         climb = Input.GetAxis("Climb");
+        
         if(isLadder && Mathf.Abs(climb) > 0f)
         {
             isClimbing = true;
         }
+
         if (isClimbing)
         {
            rb.gravityScale = 0f;
             rb.velocity = new Vector2(rb.velocity.x, climb * climbSpeed);
         }
+
         else
         {
             rb.gravityScale = 1f;
@@ -380,7 +383,15 @@ public class PlayerMovement : MonoBehaviour
             if (Time.time >= LastDash + dashCoolDown)
             {
                 ReadyToDash();
-                Destroy(other.gameObject);
+                //Destroy(other.gameObject);
+            }
+        }
+        if (other.tag == "Trap")
+        {
+            GetComponent<BoxCollider2D>().isTrigger = true;
+            if (GetComponent<BoxCollider2D>().isTrigger = true) ;
+            {
+                hp.GetComponent<HP>().LoseLife();
             }
         }
     }
@@ -400,19 +411,7 @@ public class PlayerMovement : MonoBehaviour
         //如果玩家碰到妖怪，玩家損血
         if (collision.gameObject.tag == "Monster")
         {
-            hp.GetComponent<HP>().LoseLife();
-
-        }       
-        
-        if (collision.gameObject.tag == "Trap")
-        {
-            GetComponent<BoxCollider2D>().isTrigger = true;
-            if(GetComponent<BoxCollider2D>().isTrigger = true);
-        {
-                hp.GetComponent<HP>().LoseLife();
-        }
-
-
+            hp.GetComponent<HP>().LoseLife();             
         }       
         
 

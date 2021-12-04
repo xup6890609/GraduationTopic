@@ -96,7 +96,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.3, y: -0.15}
@@ -122,7 +122,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 6
 --- !u!114 &556630560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,6 +135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2ad90fab673824aacba9fa0275616a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 556630564}
+  pos: {fileID: 6324751854728325767}
   Left: {fileID: 6324751855248892028}
   Right: {fileID: 6324751855483330598}
   speed: 3
