@@ -281,9 +281,9 @@ MonoBehaviour:
   crouchSpeed: 3
   horizontalMove: 0
   jumpForce: 2
-  jumpHoldForce: 8
-  jumpHoldDuration: 0
-  crouchJumpBoost: 8
+  Ground: {fileID: 0}
+  groundRedius: 0
+  extraJumpValue: 0
   isGround: 1
   isJump: 0
   isCrouch: 0

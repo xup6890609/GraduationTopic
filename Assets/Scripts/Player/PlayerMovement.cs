@@ -22,9 +22,13 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("跳躍參數")]
     public float jumpForce = 6.3f;
-    public float jumpHoldForce = 0.1f;
+    public Transform Ground;
+    public float groundRedius;
+    private int extraJump;
+    public int extraJumpValue;
+    /*public float jumpHoldForce = 0.1f;
     public float jumpHoldDuration = 0.1f;
-    public float crouchJumpBoost = 2.5f; //跳躍額外加成
+    public float crouchJumpBoost = 2.5f; //跳躍額外加成*/
     private float jumpTime;
 
     [Header("動作狀態")]
@@ -33,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isCrouch;
     public bool isDashing;
     bool jumpPressed; //單次跳躍
-    bool jumpHeld;   //長按跳躍
+    /*bool jumpHeld;   //長按跳躍*/
     bool crouchHeld; //長按下蹲
     bool isRun;
     bool isDead = false;
@@ -115,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         jumpPressed = Input.GetButtonDown("Jump");
-        jumpHeld = Input.GetButton("Jump");
+        /*jumpHeld = Input.GetButton("Jump");*/
         crouchHeld = Input.GetButton("Crouch");
     }
 
@@ -194,6 +198,7 @@ public class PlayerMovement : MonoBehaviour
         if (isJump)
         {
             isRun = true;
+            horizontalMove = Input.GetAxisRaw("Horizontal");
         }
     }
 
@@ -202,7 +207,21 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void Jump()
     {
-        if (jumpPressed && isGround  )
+        isGround = Physics2D.OverlapCircle(Ground.position, groundRedius, ground);
+        extraJump = extraJumpValue;
+
+        //如果按↑鍵 且 extraJump的值 >0，就執行加成跳躍
+        if (jumpPressed && extraJump > 0)
+        {
+            rb.velocity = Vector2.up * jumpForce;
+            extraJump--;
+        }
+        else if (jumpPressed && extraJump == 0 && isGround == true)
+        {
+            rb.velocity = Vector2.up * jumpForce;
+        }
+
+        /*if (jumpPressed && isGround  )
         {
             if(isCrouch)
             {
@@ -219,15 +238,15 @@ public class PlayerMovement : MonoBehaviour
 
         else if (isJump)
         {
-            if (jumpHeld)
+            /*if (jumpHeld)
             {
                 rb.AddForce(new Vector2(0f, jumpHoldForce), ForceMode2D.Impulse); //添加二維方向的力
-            }
-            if(jumpTime < Time.time)
+            }*/
+            /*if(jumpTime < Time.time)
             {
                 isJump = false;
             }
-        }
+        }*/
     }
 
     /// <summary>
@@ -358,8 +377,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (collision.CompareTag("Ladder"))
-       {
+        {
             isLadder = true;
+        }
+
+        if (collision.tag == "Trap")
+        {
+            hp.GetComponent<HP>().LoseLife();        
         }
 
     }
@@ -374,7 +398,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     /// <summary>
-    /// 玩家動作控制
+    /// 衝刺怪動作
     /// </summary>
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -386,15 +410,8 @@ public class PlayerMovement : MonoBehaviour
                 //Destroy(other.gameObject);
             }
         }
-        if (other.tag == "Trap")
-        {
-            GetComponent<BoxCollider2D>().isTrigger = true;
-            if (GetComponent<BoxCollider2D>().isTrigger = true) ;
-            {
-                hp.GetComponent<HP>().LoseLife();
-            }
-        }
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {   //如果玩家碰到衝刺妖怪，玩家執行衝刺、衝刺妖怪消失
        /* if (collision.gameObject.tag == "DashMonster")
@@ -437,7 +454,7 @@ public class PlayerMovement : MonoBehaviour
     {
         anim.SetTrigger("Die");
         isDead = true;
-        FindObjectOfType<LevelManager>().BackToMenu();
+        FindObjectOfType<MenuManager>().DeadScene();
     }
 
     /// <summary>

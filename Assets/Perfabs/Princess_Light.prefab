@@ -12,7 +12,7 @@ GameObject:
   m_Layer: 11
   m_Name: GroundCheck
   m_TagString: Ground
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5557790292697152661}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5557790293436064202}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 3338415024440281325}
   - component: {fileID: 3338415024440281324}
   m_Layer: 11
-  m_Name: Princess 1
+  m_Name: Princess_Light
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,7 +135,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3e9f7ad64994d49078648fabbe03de95, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -204,10 +204,10 @@ MonoBehaviour:
   speed: 10
   crouchSpeed: 3
   horizontalMove: 0
-  jumpForce: 2
-  jumpHoldForce: 8
-  jumpHoldDuration: 0
-  crouchJumpBoost: 8
+  jumpForce: 20
+  Ground: {fileID: 5557790292697152666}
+  groundRedius: 0.5
+  extraJumpValue: 0
   isGround: 1
   isJump: 0
   isCrouch: 0
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5557790293436064199}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7017a05d5aea1f940b58d920a4f0825e, type: 3}
   m_Name: 
