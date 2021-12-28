@@ -293,27 +293,7 @@ public class PlayerMovement : MonoBehaviour
         coll.offset = colliderStandOffset;
     }
 
-    /// <summary>
-    /// 切換動畫動作
-    /// </summary>
-   // void SwitchAnim()
-   // {
-    //    anim.SetFloat("running", Mathf.Abs(rb.velocity.x));
 
-      //  if (isGround)
-      //  {
-      //      anim.SetBool("falling", false);
-      //  }
-        //else if (!isGround && rb.velocity.y > 0)
-       // {
-       //     anim.SetBool("jumping", true);
-       // }
-       // else if (rb.velocity.y < 0)
-       // {
-       //     anim.SetBool("jumping", false);
-        //    anim.SetBool("falling", true);
-       // }
-   // }
 
     /// <summary>
     /// 準備衝刺

@@ -20,6 +20,8 @@ TagManager:
   - Trap
   - "\u9053\u5177"
   - Interactive
+  - trap
+  - Trampoline
   layers:
   - Default
   - TransparentFX
