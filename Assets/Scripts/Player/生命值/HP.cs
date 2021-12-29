@@ -6,8 +6,9 @@ using UnityEngine.UI;
 
 public class HP : MonoBehaviour
 {
-    public int hp;
-    public int NumofHearts;
+    public int hp; // 初始值
+    public int NumofHearts; // 現有值
+    public GameObject heart01, heart02, heart03, heart04, heart05, heart06, heart07, heart08, heart09, heart10;
 
     //血量的圖片
     public Image[] hearts;
@@ -42,9 +43,12 @@ public class HP : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 減血
+    /// </summary>
     internal void LoseLife()
     {
-        //hp = 0 時
+        //hp = 0 時(減少計算用)
         if (NumofHearts == 0)
             return;
 
@@ -59,5 +63,28 @@ public class HP : MonoBehaviour
         {
            FindObjectOfType<PlayerMovement>().Dead();
         }
+    }
+
+    /// <summary>
+    /// 增血
+    /// </summary>
+    internal void Heal()
+    {
+        if (NumofHearts == 0)
+            return;
+        NumofHearts += 1;
+        hp += 1;
+        hearts[NumofHearts].enabled = true;
+        /*heart01.SetActive(true);
+        heart02.SetActive(true);
+        heart03.SetActive(true);
+        heart04.SetActive(true);*/
+    }
+
+    internal void AddHpMax()
+    {
+        hp++;
+        hp = Mathf.Clamp(hp, 0, NumofHearts);
+        Update();
     }
 }

@@ -437,7 +437,7 @@ GameObject:
   - component: {fileID: 5213593655467050585}
   - component: {fileID: 5213593655467050586}
   m_Layer: 5
-  m_Name: UI
+  m_Name: UI_Lv.2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1404,6 +1404,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 3
   NumofHearts: 3
+  heart01: {fileID: 0}
+  heart02: {fileID: 0}
+  heart03: {fileID: 0}
+  heart04: {fileID: 0}
+  heart05: {fileID: 0}
+  heart06: {fileID: 0}
+  heart07: {fileID: 0}
+  heart08: {fileID: 0}
+  heart09: {fileID: 0}
+  heart10: {fileID: 0}
   hearts:
   - {fileID: 5213593655394008851}
   - {fileID: 5213593656343566985}

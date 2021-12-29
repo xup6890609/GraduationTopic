@@ -22,6 +22,8 @@ TagManager:
   - Interactive
   - trap
   - Trampoline
+  - HealGem
+  - +HPmax
   layers:
   - Default
   - TransparentFX

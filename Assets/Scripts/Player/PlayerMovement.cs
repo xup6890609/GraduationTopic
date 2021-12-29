@@ -366,6 +366,18 @@ public class PlayerMovement : MonoBehaviour
             hp.GetComponent<HP>().LoseLife();        
         }
 
+        if(collision.tag == "HealGem")
+        {
+            Destroy(collision.gameObject);
+            hp.GetComponent<HP>().Heal();
+        }
+
+        if (collision.tag == "+HPmax")
+        {
+            Destroy(collision.gameObject);
+            hp.GetComponent<HP>().AddHpMax();
+        }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
