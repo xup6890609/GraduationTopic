@@ -24,6 +24,8 @@ TagManager:
   - Trampoline
   - HealGem
   - +HPmax
+  - Crest
+  - CrestClips
   layers:
   - Default
   - TransparentFX
