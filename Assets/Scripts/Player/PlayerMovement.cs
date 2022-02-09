@@ -366,6 +366,11 @@ public class PlayerMovement : MonoBehaviour
             hp.GetComponent<HP>().LoseLife();        
         }
 
+        if(collision.tag == "Bullet")
+        {
+            hp.GetComponent<HP>().LoseLife();
+        }
+
         if(collision.tag == "HealGem")
         {
             Destroy(collision.gameObject);
