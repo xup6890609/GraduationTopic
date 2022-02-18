@@ -14,6 +14,7 @@ public class Boss : MonoBehaviour
     public GameObject Bullet;
     public GameObject Bossmush;
     private Collider2D BTColl;
+    public GameObject shrooms;
 
     //玩家座標
     //private Transform player;
@@ -30,15 +31,16 @@ public class Boss : MonoBehaviour
     {
         BTColl = Bossmush.GetComponent<BoxCollider2D>();
         //player = GameObject.Find("Princess").transform;
-
-        //執行生成子彈程式碼(每秒一次)
-        InvokeRepeating("CreatBullet", 1, 1);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (shrooms.active == true)
+        {
+            //執行生成子彈程式碼(一次)
+            Invoke("CreatBullet", 1);
+        }
     }
     
     
@@ -92,15 +94,6 @@ public class Boss : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawRay(atkPoint.position, atkPoint.forward * atkLength);
-    }
-
-    private void OnTriggerEnter2D(Collider2D coll)
-    {
-        if (coll.gameObject.tag == "Player")
-        {
-            //執行生成子彈程式碼(每秒一次)
-            InvokeRepeating("CreatBullet", 1, 1);
-        }
     }
 
 }
