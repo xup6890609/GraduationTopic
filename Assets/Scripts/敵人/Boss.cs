@@ -10,11 +10,17 @@ public class Boss : MonoBehaviour
     public Transform atkPoint;
     [Header("中心點長度"), Range(0f, 5f)]
     public float atkLength;
+    [Header("攻擊冷卻時間"), Range(0, 10)]
+    public float cd = 1f;
 
     public GameObject Bullet;
     public GameObject Bossmush;
     private Collider2D BTColl;
     public GameObject shrooms;
+    /// <summary>
+    /// 計時器
+    /// </summary>
+    private float timer;
 
     //玩家座標
     //private Transform player;
@@ -38,8 +44,12 @@ public class Boss : MonoBehaviour
     {
         if (shrooms.active == true)
         {
+            
+            CreatBullet();
+
             //執行生成子彈程式碼(一次)
-            Invoke("CreatBullet", 1);
+            //Invoke("CreatBullet", 1);
+            
         }
     }
     
@@ -69,20 +79,27 @@ public class Boss : MonoBehaviour
 
     public void CreatBullet()
     {
+        timer += Time.deltaTime;
+
         int BulletNum;
-        //隨機決定要生成幾個子彈(1-3個隨機)
-        BulletNum = UnityEngine.Random.Range(1, 3);
+        //隨機決定要生成幾個子彈(0-2個隨機)
+        BulletNum = UnityEngine.Random.Range(0, 2);
 
-        //開始生成子彈
-        for (int i = 0; i < BulletNum; i++)
+        if (timer >= cd)
         {
-            //宣告生成的Y座標
-            float y;
-            //產生隨機的Y座標(-2到4之間)
-            y = UnityEngine.Random.Range(-2, 4);
+            //開始生成子彈
+            for (int i = 0; i < BulletNum; i++)
+            {
+                //宣告生成的Y座標
+                float y;
+                //產生隨機的Y座標(-3到4之間)
+                y = UnityEngine.Random.Range(-3f, 4f);
 
-            //生成怪物
-            Instantiate(Bullet, new Vector3(this.transform.position.x, y, 0), Quaternion.identity);
+                //生成子彈
+                Instantiate(Bullet, new Vector3(this.transform.position.x, y, 0), Quaternion.identity);
+
+                timer = 0;
+            }
         }
 
     }
