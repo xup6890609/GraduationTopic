@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4726413483378459526}
   - component: {fileID: 4726413483378459522}
   - component: {fileID: 4726413483378459523}
-  - component: {fileID: 4726413483378459549}
   - component: {fileID: 4726413483378459550}
   m_Layer: 12
   m_Name: AIFoatInPointEnemies
@@ -116,6 +115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acbffd261a8b0f140bef579bd8c838d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  pos: {fileID: 0}
   Top: {fileID: 4726413483964694696}
   Bottom: {fileID: 4726413483908356299}
   speed: 3
@@ -138,24 +139,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4726413483378459549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4726413483378459548}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ed4a4057f707324b9784a3d8a009996, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  startWithTime: 0
-  waitTime: 0
-  leftDownPos: {fileID: 0}
-  rightUpPos: {fileID: 0}
-  movePos: {fileID: 0}
 --- !u!114 &4726413483378459550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
-  radius: 20
+  radius: 35
 --- !u!1 &4726413483908356292
 GameObject:
   m_ObjectHideFlags: 0
