@@ -113,6 +113,13 @@ public class PlayerMovement : MonoBehaviour
         colliderCrouchSize = new Vector2(coll.size.x, coll.size.x );
         colliderCrouchOffset = new Vector2(coll.offset.x, coll.offset.y / 2f);
 
+        extraJump = extraJumpValue;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = new Color(1, 0, 0, 0.3f);
+        Gizmos.DrawSphere(Ground.position, groundRedius);
     }
 
     // Update is called once per frame
@@ -208,7 +215,8 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         isGround = Physics2D.OverlapCircle(Ground.position, groundRedius, ground);
-        extraJump = extraJumpValue;
+
+        if (isGround) extraJump = extraJumpValue;
 
         //如果按↑鍵 且 extraJump的值 >0，就執行加成跳躍
         if (jumpPressed && extraJump > 0)
