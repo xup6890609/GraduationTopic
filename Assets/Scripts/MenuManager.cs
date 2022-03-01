@@ -6,6 +6,8 @@ public class MenuManager : MonoBehaviour
 {
     public GameObject Settings;
     public AudioMixer audioMixer;
+    public int level = 1;
+    public int hp;
     Vector2 playerPosition;
 
     /// <summary>
@@ -58,6 +60,26 @@ public class MenuManager : MonoBehaviour
     public void BackToMenu()
     {
         SceneManager.LoadScene("選單");
+    }
+
+    /// <summary>
+    /// 儲存遊戲
+    /// </summary>
+    public void SaveGame()
+    {
+        SaveManager.Save(this);
+    }
+
+    /// <summary>
+    /// 讀取遊戲
+    /// </summary>
+    public void LoadGame()
+    {
+        SaveData data = SaveManager.LoadGame();
+        level = data.level;
+        hp = data.hp;
+
+        transform.position = playerPosition;
     }
 
     /// <summary>

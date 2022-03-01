@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("環境檢測")]
     public LayerMask ground;
+    public Vector3 respawnPoint;
 
     [Header("血量")]
     public GameObject hp;
@@ -114,6 +115,13 @@ public class PlayerMovement : MonoBehaviour
         colliderCrouchOffset = new Vector2(coll.offset.x, coll.offset.y / 2f);
 
         extraJump = extraJumpValue;
+        /*respawnPoint = PlayerMovement.instance.transform.position;  //重製點
+        if (Save.instance.isLoaded)
+        {
+            respawnPoint = Save.instance.save.respawnPos;
+            PlayerMovement.instance.transform.position = respawnPoint;
+            hp = Save.instance.save.hp;
+        }*/
     }
 
     private void OnDrawGizmos()
@@ -173,7 +181,6 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector3(horizontalMove, 1, 1);
         }
 
-        //如果按下unity預設下蹲按鍵，就執行"下蹲"動作
         //如果按下unity預設下蹲按鍵 + 角色判斷在地面上，就執行"下蹲"動作
         if (crouchHeld && !isCrouch && isGround)
         {
@@ -222,7 +229,7 @@ public class PlayerMovement : MonoBehaviour
         if (jumpPressed && extraJump > 0)
         {
             rb.velocity = Vector2.up * jumpForce;
-            extraJump--;
+            extraJump++;
         }
         else if (jumpPressed && extraJump == 0 && isGround == true)
         {
@@ -272,7 +279,7 @@ public class PlayerMovement : MonoBehaviour
         if (isClimbing)
         {
            rb.gravityScale = 0f;
-            rb.velocity = new Vector2(rb.velocity.x, climb * climbSpeed);
+           rb.velocity = new Vector2(rb.velocity.x, climb * climbSpeed);
         }
 
         else
@@ -344,17 +351,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
-    //切換角色顯示動畫
-    // public void FloatSkin()
-    //{
-    //     GetComponent<Animator>().runtimeAnimatorController = FloatingAnim as RuntimeAnimatorController;
-    // }
-
-    //public void CrashSkin()
-    //{
-    // GetComponent<Animator>().runtimeAnimatorController = CrashingAnim as RuntimeAnimatorController;
-    // }
 
     //如果玩家碰到收集物件，收集物件就消失
     private void OnTriggerEnter2D(Collider2D collision)

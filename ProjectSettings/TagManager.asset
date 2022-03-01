@@ -26,6 +26,8 @@ TagManager:
   - +HPmax
   - Crest
   - CrestClips
+  - Bullet
+  - SavePoint
   layers:
   - Default
   - TransparentFX
