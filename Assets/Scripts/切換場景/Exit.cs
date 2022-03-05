@@ -26,7 +26,6 @@ public class Exit : MonoBehaviour
         if (other.tag == "Player")
         {
             PlayerMovement.instance.scenePassword = newScenePassword;
-            SceneManager.LoadScene(sceneName);
         }
     }
 }

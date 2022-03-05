@@ -11,7 +11,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("環境檢測")]
     public LayerMask ground;
-    public Vector3 respawnPoint;
+    public LayerMask DoNotStand;
+
 
     [Header("血量")]
     public GameObject hp;
@@ -27,16 +28,17 @@ public class PlayerMovement : MonoBehaviour
     public float groundRedius;
     private int extraJump;
     public int extraJumpValue;
-    /*public float jumpHoldForce = 0.1f;
-    public float jumpHoldDuration = 0.1f;
-    public float crouchJumpBoost = 2.5f; //跳躍額外加成*/
-    private float jumpTime;
+
+    [Header("偵測頭上是否有東西")]
+    public Transform haveSomething;
+    public float headRedius;
 
     [Header("動作狀態")]
     public bool isGround;
     public bool isJump;
     public bool isCrouch;
     public bool isDashing;
+    public bool headHaveSomeing;
     bool jumpPressed; //單次跳躍
     /*bool jumpHeld;   //長按跳躍*/
     bool crouchHeld; //長按下蹲
@@ -127,7 +129,9 @@ public class PlayerMovement : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = new Color(1, 0, 0, 0.3f);
+
         Gizmos.DrawSphere(Ground.position, groundRedius);
+        Gizmos.DrawSphere(haveSomething.position,headRedius);
     }
 
     // Update is called once per frame
@@ -143,6 +147,7 @@ public class PlayerMovement : MonoBehaviour
         //PhysicsCheck();
         GroundMovement();
         Jump();
+        Head();
         Run();
         Climb();
         Dash();
@@ -159,6 +164,11 @@ public class PlayerMovement : MonoBehaviour
         if (coll.IsTouchingLayers(ground))
             isGround = true;
         else isGround = false;
+
+        if (coll.IsTouchingLayers(DoNotStand))
+            headHaveSomeing = true;
+        else headHaveSomeing = false;
+
     }
 
 
@@ -188,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //如果沒有，則自動執行"起立"動作
-        else if(!crouchHeld && isCrouch )
+        else if(!crouchHeld && isCrouch && ! headHaveSomeing)
         {
             StandUp();
         }
@@ -223,45 +233,29 @@ public class PlayerMovement : MonoBehaviour
     {
         isGround = Physics2D.OverlapCircle(Ground.position, groundRedius, ground);
 
-        if (isGround) extraJump = extraJumpValue;
+        if (isGround && !headHaveSomeing) extraJump = extraJumpValue;
 
         //如果按↑鍵 且 extraJump的值 >0，就執行加成跳躍
-        if (jumpPressed && extraJump > 0)
+        if (jumpPressed && extraJump > 0 )
         {
             rb.velocity = Vector2.up * jumpForce;
-            extraJump++;
+            extraJump--;
         }
-        else if (jumpPressed && extraJump == 0 && isGround == true)
+        else if (jumpPressed && extraJump == 0 && isGround == true )
         {
             rb.velocity = Vector2.up * jumpForce;
         }
 
-        /*if (jumpPressed && isGround  )
-        {
-            if(isCrouch)
-            {
-                StandUp();
+    }
 
-            }
-            isGround = false;
-            isJump = true;
-            jumpTime = Time.time + jumpHoldDuration;
-            
-            rb.AddForce(new Vector2(0f, crouchJumpBoost), ForceMode2D.Impulse);//添加二維方向的力
-        }
-    
-
-        else if (isJump)
-        {
-            /*if (jumpHeld)
-            {
-                rb.AddForce(new Vector2(0f, jumpHoldForce), ForceMode2D.Impulse); //添加二維方向的力
-            }*/
-            /*if(jumpTime < Time.time)
-            {
-                isJump = false;
-            }
-        }*/
+    /// <summary>
+    /// 偵測頭頂有沒有東西
+    /// </summary>
+    void Head()
+    {
+        headHaveSomeing = Physics2D.OverlapCircle(haveSomething.position, headRedius, DoNotStand);
+        if (headHaveSomeing)
+            Crouch();
     }
 
     /// <summary>
@@ -306,7 +300,9 @@ public class PlayerMovement : MonoBehaviour
         isCrouch = false;
         coll.size = colliderStandSize;
         coll.offset = colliderStandOffset;
+
     }
+
 
 
 
@@ -456,6 +452,12 @@ public class PlayerMovement : MonoBehaviour
         anim.SetTrigger("Die");
         isDead = true;
         FindObjectOfType<MenuManager>().DeadScene();
+
+       /* if (isDead = true  && Entrance.Start)
+        {
+            FindObjectOfType<MenuManager>().NextLevel();
+        }*/
+
     }
 
     /// <summary>

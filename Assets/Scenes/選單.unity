@@ -796,6 +796,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Settings: {fileID: 0}
   audioMixer: {fileID: 0}
+  level: 1
+  hp: 0
 --- !u!1 &1041263988
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,7 +1004,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1115410441
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2777,6 +2779,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Settings: {fileID: 1812510651}
   audioMixer: {fileID: 24100000, guid: 827e8bad1ca766041bd67db824246d74, type: 2}
+  level: 1
+  hp: 0
 --- !u!82 &1829428544
 AudioSource:
   m_ObjectHideFlags: 0

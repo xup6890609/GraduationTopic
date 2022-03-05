@@ -6,15 +6,17 @@ public class MenuManager : MonoBehaviour
 {
     public GameObject Settings;
     public AudioMixer audioMixer;
-    public int level = 1;
-    public int hp;
-    Vector2 playerPosition;
+    public GameObject Lv2;
+    public bool inLv2;
+    public GameObject player;
+
 
     /// <summary>
     /// 開始遊戲
     /// </summary>
     public void StartGame()
     {
+        inLv2 = false;
         print("開始遊戲");
         SceneManager.LoadScene("Lv.1");
     }
@@ -24,8 +26,14 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void NextLevel(string nameLV)
     {
+        if (inLv2)
+            Lv2.SetActive(true);
+        else
+            Lv2.SetActive(false);
+        inLv2 = true;
         SceneManager.LoadScene(nameLV);
     }
+
 
     /// <summary>
     /// 離開遊戲
@@ -60,26 +68,6 @@ public class MenuManager : MonoBehaviour
     public void BackToMenu()
     {
         SceneManager.LoadScene("選單");
-    }
-
-    /// <summary>
-    /// 儲存遊戲
-    /// </summary>
-    public void SaveGame()
-    {
-        SaveManager.Save(this);
-    }
-
-    /// <summary>
-    /// 讀取遊戲
-    /// </summary>
-    public void LoadGame()
-    {
-        SaveData data = SaveManager.LoadGame();
-        level = data.level;
-        hp = data.hp;
-
-        transform.position = playerPosition;
     }
 
     /// <summary>
