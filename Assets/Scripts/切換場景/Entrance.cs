@@ -13,6 +13,7 @@ public class Entrance : MonoBehaviour
         {
             PlayerMovement.instance.transform.position = transform.position;    //transform.position等於enter position
             Debug.Log("enter");
+           GetComponent<MenuManager>().inLv2 = true;
         }
         else
         {

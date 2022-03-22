@@ -794,10 +794,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2634d8078c3f9ad40831d99717ab9f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Settings: {fileID: 0}
-  audioMixer: {fileID: 0}
-  level: 1
-  hp: 0
+  Settings: {fileID: 1238968398}
+  audioMixer: {fileID: 24100000, guid: 827e8bad1ca766041bd67db824246d74, type: 2}
+  Lv2: {fileID: 1115410440}
+  inLv2: 0
 --- !u!1 &1041263988
 GameObject:
   m_ObjectHideFlags: 0
@@ -2779,8 +2779,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Settings: {fileID: 1812510651}
   audioMixer: {fileID: 24100000, guid: 827e8bad1ca766041bd67db824246d74, type: 2}
-  level: 1
-  hp: 0
+  Lv2: {fileID: 1115410440}
+  inLv2: 0
 --- !u!82 &1829428544
 AudioSource:
   m_ObjectHideFlags: 0

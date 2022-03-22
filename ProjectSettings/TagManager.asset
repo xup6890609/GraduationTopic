@@ -48,7 +48,7 @@ TagManager:
   - Environment
   - items
   - Platform
-  - 
+  - Boss
   - 
   - 
   - 
@@ -88,4 +88,7 @@ TagManager:
     locked: 0
   - name: Interactive
     uniqueID: 4146366615
+    locked: 0
+  - name: Boss
+    uniqueID: 3863641319
     locked: 0

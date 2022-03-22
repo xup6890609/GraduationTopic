@@ -61,7 +61,7 @@ public class Boss : MonoBehaviour
 
         if (dist > attackrange)
         {
-            transform.Translate(Vector3.right * movespeed * Time.deltaTime);
+            transform.Translate(Vector3.left * movespeed * Time.deltaTime);
         }
 
         Vector2 direction = player.transform.position - transform.position;
