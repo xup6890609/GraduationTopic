@@ -370,6 +370,11 @@ public class PlayerMovement : MonoBehaviour
         {
             hp.GetComponent<HP>().LoseLife();
         }
+        
+        if(collision.tag == "Enemy")
+        {
+            hp.GetComponent<HP>().LoseLife();
+        }
 
         if(collision.tag == "HealGem")
         {
