@@ -462,7 +462,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     /// <summary>
-    /// 死亡2秒後才顯示死望畫面
+    /// 死亡2秒後才顯示死亡畫面
     /// </summary>
     IEnumerator WaitDieTime()
     {
@@ -471,8 +471,6 @@ public class PlayerMovement : MonoBehaviour
             yield return new WaitForSeconds(2);
             FindObjectOfType<MenuManager>().DeadScene();
         }
-
-
     }
 
     /// <summary>

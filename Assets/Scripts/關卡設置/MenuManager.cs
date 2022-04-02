@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using System.Collections;
 
 public class MenuManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class MenuManager : MonoBehaviour
     public AudioMixer audioMixer;
     public GameObject Lv2;
     public bool inLv2;
+    bool PlayVideo;
 
     private void Start()
     {
@@ -18,12 +20,32 @@ public class MenuManager : MonoBehaviour
     }
 
     /// <summary>
+    /// 播放片頭1秒後才顯示遊戲畫面
+    /// </summary>
+    IEnumerator WaitforTime()
+    {
+        if (PlayVideo == true)
+        {
+            SceneManager.LoadScene("片頭動畫");
+            yield return new WaitForSeconds(1);
+            StartGame();
+        }
+    }
+
+    public void PlayVid()
+    {
+        PlayVideo = true;
+        StartCoroutine(WaitforTime());
+    }
+
+    /// <summary>
     /// 開始遊戲
     /// </summary>
     public void StartGame()
     {
         print("開始遊戲");
         SceneManager.LoadScene("Lv.1");
+
     }
 
     /// <summary>
