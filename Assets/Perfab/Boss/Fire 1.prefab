@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2566773752414679475}
   - component: {fileID: 5159391521865776658}
   - component: {fileID: 5524040668070755857}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Fire 1
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -868,7 +868,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 8
+      scalar: 6
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -974,7 +974,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 1
+    enabled: 0
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -4770,9 +4770,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00000011920929, y: 0}
+  m_Offset: {x: 0.00999999, y: 0.14689426}
   serializedVersion: 2
-  m_Radius: 0.50706017
+  m_Radius: 0.33768588
 --- !u!114 &5524040668070755857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4785,7 +4785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ade7e2d73a68c446be2fc7094fc2d21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cd: 50
+  cd: 70
 --- !u!1 &7287407373634934974
 GameObject:
   m_ObjectHideFlags: 0
@@ -4797,7 +4797,7 @@ GameObject:
   - component: {fileID: 2897660583556359779}
   - component: {fileID: 3982225973073353810}
   - component: {fileID: 6954204565596920440}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}

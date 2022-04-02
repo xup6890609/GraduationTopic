@@ -93,7 +93,7 @@ public class Boss : MonoBehaviour
                 //宣告生成的Y座標
                 float y;
                 //產生隨機的Y座標(-3到4之間)
-                y = UnityEngine.Random.Range(-3f, 4f);
+                y = UnityEngine.Random.Range(-1.7f, 4f);
 
                 //生成子彈
                 Instantiate(Bullet, new Vector3(this.transform.position.x, y, 0), Quaternion.identity);

@@ -6,8 +6,8 @@ public class BetterJumping : MonoBehaviour
 {
     private Rigidbody2D rb;
     
-    private float FallMultiplier = 2.5f;
-    private float LowMultiplier = 2f;
+    private float FallMultiplier = 1f;
+    private float LowMultiplier = 1f;
     
     // Start is called before the first frame update
     void Start()

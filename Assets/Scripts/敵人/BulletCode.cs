@@ -17,7 +17,7 @@ public class BulletCode : MonoBehaviour
     void Update()
     {
         //每一偵子彈向右飛行
-        this.transform.position += new Vector3(0.05f, 0, 0);
+        this.transform.position += new Vector3(0.02f, 0, 0);
     }
     //下面這個函式是當子彈碰撞到其他物體時會執行
     private void OnTriggerEnter2D(Collider2D other)

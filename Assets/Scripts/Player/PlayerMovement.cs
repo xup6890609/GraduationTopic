@@ -117,7 +117,6 @@ public class PlayerMovement : MonoBehaviour
         colliderCrouchOffset = new Vector2(coll.offset.x, coll.offset.y / 2f);
 
         extraJump = extraJumpValue;
-        StartCoroutine(WaitDieTime());
         /*respawnPoint = PlayerMovement.instance.transform.position;  //重製點
         if (Save.instance.isLoaded)
         {
@@ -458,11 +457,7 @@ public class PlayerMovement : MonoBehaviour
         anim.SetTrigger("Die");
         isDead = true;
         rb.bodyType = RigidbodyType2D.Static;        //避免死亡還能移動
-
-       /* if (isDead = true  && Entrance.Start)
-        {
-            FindObjectOfType<MenuManager>().NextLevel();
-        }*/
+        StartCoroutine(WaitDieTime());
 
     }
 
