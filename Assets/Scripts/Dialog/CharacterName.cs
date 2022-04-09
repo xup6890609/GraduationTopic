@@ -15,6 +15,7 @@ public class CharacterName : MonoBehaviour
 
     bool textFinished;
 
+
     List<string> textList = new List<string>();
 
     // 讀取文本中的文字
@@ -28,6 +29,7 @@ public class CharacterName : MonoBehaviour
         textFinished = true;
         StartCoroutine(SetTextUI());
     }
+
 
     /// <summary>
     /// 按R鍵讀取文本文字並循環

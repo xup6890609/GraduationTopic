@@ -25,6 +25,7 @@ public class DialogSystem : MonoBehaviour
     bool textFinished;
     bool cancelTyping;
 
+
     List<string> textList = new List<string>();
 
     // 讀取文本中的文字
