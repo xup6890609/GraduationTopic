@@ -8,7 +8,7 @@ public class HP : MonoBehaviour
 {
     public int hp; // 初始值
     public int NumofHearts; // 現有值
-    public GameObject heart01, heart02, heart03, heart04, heart05, heart06, heart07, heart08, heart09, heart10;
+    public GameObject heart01, heart02, heart03;
 
     //血量的圖片
     public Image[] hearts;

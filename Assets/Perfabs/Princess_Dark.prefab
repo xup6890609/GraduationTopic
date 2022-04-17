@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &209211008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 209211009}
+  m_Layer: 11
+  m_Name: HeadCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &209211009
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 209211008}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.94, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7166724634445984443}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &365955445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,6 +170,7 @@ Transform:
   m_LocalPosition: {x: -1.75, y: -2.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 209211009}
   - {fileID: 7166724636258643947}
   - {fileID: 4677640452221549532}
   m_Father: {fileID: 0}
@@ -163,7 +194,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 757ee5865faf6424b99e7df8f1c3d502, type: 2}
+  - {fileID: 2100000, guid: 05ae9bf5bcae11f458b583c9a60aa02a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -185,7 +216,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b82bdb69f4f0e5741bc3f2920ceab436, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -276,22 +307,28 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 256
+  DoNotStand:
+    serializedVersion: 2
+    m_Bits: 262144
   hp: {fileID: 0}
   speed: 10
   crouchSpeed: 3
   horizontalMove: 0
-  jumpForce: 2
-  Ground: {fileID: 0}
-  groundRedius: 0
+  jumpForce: 15
+  Ground: {fileID: 7166724636258643947}
+  groundRedius: 0.66
   extraJumpValue: 0
+  haveSomething: {fileID: 209211009}
+  headRedius: 0
   isGround: 1
   isJump: 0
   isCrouch: 0
   isDashing: 0
+  headHaveSomeing: 0
   scenePassword: 
-  dashTime: 0.15
-  dashSpeed: 50
-  dashCoolDown: 1
+  dashTime: 0.2
+  dashSpeed: 25
+  dashCoolDown: 0
 --- !u!114 &1006132124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,7 +348,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7166724634445984438}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7017a05d5aea1f940b58d920a4f0825e, type: 3}
   m_Name: 
@@ -328,7 +365,7 @@ GameObject:
   m_Layer: 11
   m_Name: GroundCheck
   m_TagString: Ground
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -340,11 +377,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7166724636258643940}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.14, y: -1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7166724634445984443}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7166724634976488045
 PrefabInstance:
@@ -409,7 +446,7 @@ PrefabInstance:
     - target: {fileID: 2566773752414679473, guid: 79e6e01b366e4ac4c9310730ad3b89da,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2566773752414679473, guid: 79e6e01b366e4ac4c9310730ad3b89da,
         type: 3}

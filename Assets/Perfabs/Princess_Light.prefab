@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 5557790293436064203}
   - component: {fileID: 3338415024440281325}
   - component: {fileID: 1644043171}
+  - component: {fileID: 934020240}
   m_Layer: 11
   m_Name: Princess_Light
   m_TagString: Player
@@ -252,6 +253,18 @@ MonoBehaviour:
   amount: 0
   fullAmount: 5
   GoToNext: {fileID: 0}
+--- !u!114 &934020240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5557790293436064199}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7017a05d5aea1f940b58d920a4f0825e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3338415023738280452
 MonoBehaviour:
   m_ObjectHideFlags: 0
