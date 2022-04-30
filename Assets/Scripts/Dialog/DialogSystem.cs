@@ -65,6 +65,7 @@ public class DialogSystem : MonoBehaviour
            else if(!textFinished && !cancelTyping)
             {
                 cancelTyping = true;
+                StopCoroutine(SetTextUI());
             }
         }
     }

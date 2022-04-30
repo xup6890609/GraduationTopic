@@ -119,7 +119,7 @@ MonoBehaviour:
   pos: {fileID: 0}
   Top: {fileID: 4726413483964694696}
   Bottom: {fileID: 4726413483908356299}
-  speed: 3
+  speed: 2
 --- !u!95 &4726413483378459523
 Animator:
   serializedVersion: 3
