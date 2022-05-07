@@ -311,7 +311,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 262144
   hp: {fileID: 0}
-  speed: 10
+  speed: 5.5
   crouchSpeed: 3
   horizontalMove: 0
   jumpForce: 15
