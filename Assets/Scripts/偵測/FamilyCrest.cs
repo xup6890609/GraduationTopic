@@ -15,6 +15,10 @@ public class FamilyCrest : MonoBehaviour
     public int amount;
     public int fullAmount;
 
+    [Header("音效")]
+    public AudioSource collectAudio;       //收集音效
+    public AudioSource collapseAudio;      //倒塌音效
+
     [Header("下一關檔板")]
     public GameObject GoToNext;
     
@@ -39,12 +43,14 @@ public class FamilyCrest : MonoBehaviour
             amount += 1;
             fullAmount = amount;
             Crest.fillAmount += 0.2f;
+            collectAudio.Play();
         }
 
         //如果達到最大值，刪除檔板
-        if(fullAmount == 5)
+        if (fullAmount == 5)
         {
             Destroy(GoToNext);
+            collapseAudio.Play();
         }
     }
 }

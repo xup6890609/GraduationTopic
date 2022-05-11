@@ -6,15 +6,26 @@ using UnityEngine.UI;
 
 public class HP : MonoBehaviour
 {
+    [Header("血量")]
     public int hp; // 初始值
     public int NumofHearts; // 現有值
     public GameObject heart01, heart02, heart03;
 
-    //血量的圖片
+    [Header("血量的圖片")]
     public Image[] hearts;
     public Sprite HP_Full;
     public Sprite HP_0;
     public GameObject player;
+
+    [Header("音效")]
+    public AudioSource hurtAudio;       //受傷音效
+    public AudioSource healAudio;       //增血音效
+
+    private void Start()
+    {
+        hurtAudio = GetComponent<AudioSource>();
+
+    }
 
     private void Update()
     {
@@ -57,7 +68,7 @@ public class HP : MonoBehaviour
         
         //hp圖片變成空心狀態
         hearts[NumofHearts].enabled = false;
-
+        hurtAudio.Play();
         //沒有心心時，玩家死亡
         if(NumofHearts == 0)
         {
@@ -75,6 +86,7 @@ public class HP : MonoBehaviour
         NumofHearts += 1;
         hp += 1;
         hearts[NumofHearts].enabled = true;
+        healAudio.Play();
         /*heart01.SetActive(true);
         heart02.SetActive(true);
         heart03.SetActive(true);
