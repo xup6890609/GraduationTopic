@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isGround;
     public bool isJump;
     public bool isCrouch;
+    public bool isClimbing;
     public bool isDashing;
     public bool headHaveSomeing;
     bool jumpPressed; //單次跳躍
@@ -45,11 +46,14 @@ public class PlayerMovement : MonoBehaviour
     bool isRun;
     bool isDead = false;
 
+    [Header("音效")]
+    public AudioSource dashAudio, climbAudio;
+
     [Header("攀爬參數")]
     private float climb;
     float climbSpeed = 8f;
     bool isLadder;
-    bool isClimbing;
+
 
     [Header("場景轉換")]
     public static PlayerMovement instance;
@@ -272,7 +276,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (isClimbing)
         {
-           rb.gravityScale = 0f;
+            climbAudio.Play();
+            rb.gravityScale = 0f;
            rb.velocity = new Vector2(rb.velocity.x, climb * climbSpeed);
         }
 
@@ -315,6 +320,7 @@ public class PlayerMovement : MonoBehaviour
 
         dashLeft = dashTime;
         LastDash = Time.time;
+        dashAudio.Play();
         //CDImage.fillAmount = 1;
     }
 

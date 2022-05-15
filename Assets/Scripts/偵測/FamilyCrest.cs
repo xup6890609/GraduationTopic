@@ -30,6 +30,8 @@ public class FamilyCrest : MonoBehaviour
     {
         amount = 0;
         fullAmount = amount;
+        collectAudio = GetComponent<AudioSource>();
+        collapseAudio = GetComponent<AudioSource>();
     }
     
     /// <summary>
@@ -42,15 +44,27 @@ public class FamilyCrest : MonoBehaviour
             Destroy(other.gameObject);
             amount += 1;
             fullAmount = amount;
-            Crest.fillAmount += 0.2f;
-            collectAudio.Play();
+            Crest.fillAmount += 0.2f;      //UI的圖片家1/5
+            collectAudio.Play();           //播放收集音效
         }
 
         //如果達到最大值，刪除檔板
         if (fullAmount == 5)
         {
             Destroy(GoToNext);
+        }
+    }
+    /// <summary>
+    /// 播放收集音效2秒後才顯示播放倒塌音效
+    /// </summary>
+    IEnumerator WaitDieTime()
+    {
+        if (fullAmount == 5)
+        {
+            yield return new WaitForSeconds(1);
             collapseAudio.Play();
+            yield return new WaitForSeconds(2);
+            collapseAudio.Stop();
         }
     }
 }

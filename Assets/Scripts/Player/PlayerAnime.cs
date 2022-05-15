@@ -11,9 +11,10 @@ public class PlayerAnime : MonoBehaviour
     /// 設定編號
     /// </summary>
     int idleID;
-    int runningID;
     int crouchID;
+    int climbID;
     int jumpingID;
+    int runningID;
 
     void Start()
     {
@@ -21,12 +22,13 @@ public class PlayerAnime : MonoBehaviour
         movement = GetComponentInParent<PlayerMovement>();
 
         /// <summary>
-        /// 編號對應Animator的數值
+        /// 編號對應Animator的數值 (Unity Animator視窗的控制動畫的參數)
         /// (StringToHash:把「字符形」程式轉成「數字」)
         /// </summary>
         idleID = Animator.StringToHash("Idle");
         runningID = Animator.StringToHash("running");
         crouchID = Animator.StringToHash("Crouch");
+        climbID = Animator.StringToHash("Climb");
         jumpingID = Animator.StringToHash("Jumping");
 
     }
@@ -37,6 +39,7 @@ public class PlayerAnime : MonoBehaviour
         anim.SetFloat(runningID, Mathf.Abs(movement.horizontalMove)); //判斷在animator面板中的值是否為0
         anim.SetBool(idleID, movement.isGround);
         anim.SetBool(crouchID, movement.isCrouch);
+        anim.SetBool(climbID, movement.isClimbing);
         anim.SetBool(jumpingID, movement.isJump);
     }
 }

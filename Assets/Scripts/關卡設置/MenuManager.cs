@@ -8,7 +8,9 @@ public class MenuManager : MonoBehaviour
     public GameObject Settings;
     public AudioMixer audioMixer;
     public GameObject Lv2;
+    public GameObject Lv3;
     public bool inLv2;
+    public bool inLv3;
     bool PlayVideo;
 
     private void Start()
@@ -17,6 +19,10 @@ public class MenuManager : MonoBehaviour
             Lv2.SetActive(true);
         else
             Lv2.SetActive(false);
+        if (inLv3 == true)
+            Lv3.SetActive(true);
+        else
+            Lv3.SetActive(false);
     }
 
     /// <summary>

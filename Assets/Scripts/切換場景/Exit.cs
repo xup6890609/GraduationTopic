@@ -18,14 +18,22 @@ public class Exit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        
         
     }
-
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
-            PlayerMovement.instance.scenePassword = newScenePassword;
+            if (Application.loadedLevel == 1)
+            {
+                SceneManager.LoadScene(2);
+            }
+            else
+            {
+                SceneManager.LoadScene(1);
+            }
         }
     }
 }
